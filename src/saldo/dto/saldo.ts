@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsPositive } from 'class-validator';
 
 export class SaldoResponseDto {
@@ -15,9 +16,11 @@ export class SaldoResponseDto {
 }
 
 export class SaldoDto {
+  @ApiProperty({ required: true })
   @IsNumber()
   user_id: number;
 
+  @ApiProperty({ required: true })
   @IsNumber()
   @IsPositive()
   total_balance: number;

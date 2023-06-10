@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsPositive, Min } from 'class-validator';
 
 export class WithdrawResponseDto {
@@ -15,11 +16,13 @@ export class WithdrawResponseDto {
 }
 
 export class CreateWithdrawDto {
+  @ApiProperty({ required: true })
   @IsNumber()
   @Min(0)
   @IsPositive()
   withdraw_amount: number;
 
+  @ApiProperty({ required: true })
   @IsNumber()
   @Min(1)
   user_id: number;

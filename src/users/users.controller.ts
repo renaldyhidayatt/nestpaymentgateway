@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { AccessTokenGuard } from 'src/guards/accessToken.guard';
 import { UserResponseDTO } from './dto/UserResponseDto';
 import { LoginDto } from './dto/UserDto';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 interface AuthenticatedUser {
   email: string;
@@ -13,8 +14,9 @@ interface AuthenticatedUser {
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get('activate')
+  @ApiBearerAuth()
   @UseGuards(AccessTokenGuard)
+  @Get('activate')
   async activeAccount(
     @Req() req: Request & { user: AuthenticatedUser },
   ): Promise<UserResponseDTO> {
@@ -23,8 +25,9 @@ export class UsersController {
     return this.usersService.activateAccount(email);
   }
 
-  @Post('forgot')
+  @ApiBearerAuth()
   @UseGuards(AccessTokenGuard)
+  @Post('forgot')
   async forgot(
     @Req() req: Request & { user: AuthenticatedUser },
   ): Promise<UserResponseDTO> {
@@ -43,6 +46,7 @@ export class UsersController {
     return this.usersService.register(dto);
   }
 
+  @ApiBearerAuth()
   @Post('resend')
   @UseGuards(AccessTokenGuard)
   async resend(
@@ -53,6 +57,7 @@ export class UsersController {
     return this.usersService.resend(email);
   }
 
+  @ApiBearerAuth()
   @Post('reset')
   @UseGuards(AccessTokenGuard)
   async reset(

@@ -1,4 +1,4 @@
-export class AdminResponseDto {
+texport class AdminResponseDto {
   status: number;
   method: string;
   message: string;

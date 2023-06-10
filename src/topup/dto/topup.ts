@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsOptional, IsPositive, IsString } from 'class-validator';
 
 export class TopupResponseDto {
@@ -15,16 +16,20 @@ export class TopupResponseDto {
 }
 
 export class TopupDto {
+  @ApiProperty({ required: false })
   @IsOptional()
   topup_no?: any;
 
+  @ApiProperty({ required: true })
   @IsNumber()
   @IsPositive()
   topup_amount: number;
 
+  @ApiProperty({ required: true })
   @IsNumber()
   user_id: number;
 
+  @ApiProperty({ required: true })
   @IsString()
   topup_method: string;
 
