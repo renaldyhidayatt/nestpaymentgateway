@@ -1,3 +1,5 @@
+import { IsEmail, IsString, Length } from 'class-validator';
+
 interface IUsers {
   readonly user_id?: number;
   readonly email: string;
@@ -26,6 +28,10 @@ export class UsersDTO implements IUsers {
 }
 
 export class LoginDto {
+  @IsEmail()
   email: string;
+
+  @IsString()
+  @Length(6, 20)
   password: string;
 }

@@ -1,3 +1,5 @@
+import { IsNumber, IsOptional, IsPositive, IsString } from 'class-validator';
+
 export class TopupResponseDto {
   status: number;
   method: string;
@@ -13,9 +15,17 @@ export class TopupResponseDto {
 }
 
 export class TopupDto {
+  @IsOptional()
   topup_no?: any;
+
+  @IsNumber()
+  @IsPositive()
   topup_amount: number;
+
+  @IsNumber()
   user_id: number;
+
+  @IsString()
   topup_method: string;
 
   constructor(

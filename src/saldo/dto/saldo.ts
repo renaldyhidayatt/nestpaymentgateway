@@ -1,3 +1,5 @@
+import { IsNumber, IsPositive } from 'class-validator';
+
 export class SaldoResponseDto {
   status: number;
   method: string;
@@ -13,7 +15,11 @@ export class SaldoResponseDto {
 }
 
 export class SaldoDto {
+  @IsNumber()
   user_id: number;
+
+  @IsNumber()
+  @IsPositive()
   total_balance: number;
 
   constructor(user_id: number, total_balance: number) {
