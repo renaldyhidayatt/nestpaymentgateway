@@ -7,9 +7,13 @@ import { WithdrawModule } from './withdraw/withdraw.module';
 import { TopupModule } from './topup/topup.module';
 import { TransferModule } from './transfer/transfer.module';
 import { SaldoModule } from './saldo/saldo.module';
-import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './users/user.entity';
+import { Saldo } from './saldo/saldo.entity';
+import { Topup } from './topup/topup.entity';
+import { Transfer } from './transfer/transfer.entity';
+import { Withdraw } from './withdraw/withdraw.entity';
 
 @Module({
   imports: [
@@ -18,12 +22,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.POSTGRESS_HOST,
-      port: parseInt(process.env.POSTGRESS_PORT),
-      username: process.env.POSTGRESS_USER,
-      password: process.env.POSTGRESS_PASSWORD,
-      database: process.env.POSTGRESS_DB,
-      entities: [],
+      host: process.env.POSTGRES_HOST,
+      port: parseInt(process.env.POSTGRES_PORT),
+      username: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      database: process.env.POSTGRES_DB,
+      entities: [User, Saldo, Topup, Transfer, Withdraw],
       synchronize: true,
     }),
 
@@ -33,7 +37,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TopupModule,
     TransferModule,
     SaldoModule,
-    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
